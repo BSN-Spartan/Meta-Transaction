@@ -30,7 +30,7 @@ How can we achieve this? We embed a meta transaction inside an ordinary transact
 Get the Meta Transaction contract source code by command:
 
 ```
-$ git clone https://github.com/BSN-Spartan/xxxxxxxxxxxxxxx.git
+$ git clone https://github.com/BSN-Spartan/Meta-Transaction.git
 ```
 
 For beginners, the contracts in this application can be deployed by the steps in [Spartan Quick Testing](https://www.spartan.bsn.foundation/main/quick-testing#step1).
