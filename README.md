@@ -1,12 +1,13 @@
-# Meta-Transaction
+# BSN Spartan Meta Transaction
 
 [![Smart Contract](https://badgen.net/badge/smart-contract/Solidity/orange)](https://soliditylang.org/)
 
-A meta transaction is an Ethereum transaction that inserts another transaction in the original one. The user signs it using their private key and sends it to the relayer, which verifies it, submits it to the blockchain, and handles the gas credit.
+A meta transaction is an Ethereum transaction that inserts another transaction in the original transaction. The user signs it using their private key and sends it to the relayer, which verifies it, submits it to the blockchain, and handles the gas credit.
 
 ## Prerequisite
 
 Before using this smart contract, it is important to have a basic understanding of Ethereum and Solidity, as well as [ERC2612](https://eips.ethereum.org/EIPS/eip-2612) standard.
+
 
 ## Overview
 
@@ -21,7 +22,7 @@ Before talking about meta transaction, let's take a glance at what a transaction
 - `gasPrice` – the fee paid by the sender per unit of Gas
 - `nonce` – the number of transactions that the sender has sent
 
-Note that the `signature` field allows anyone to verify that the transaction was signed by the sender. When sending the transaction to the blockchain, the sender will pay the gas fee, and the verified transaction will be submitted to the node. Then the node will broadcast this transaction in the blockchain network. **If this transaction is sent to an intermediary that can help the sender pay the gas fee and execute the transaction, then this is a meta transaction**.
+Note that the `signature` field allows anyone to verify that the transaction was signed by the sender. When sending the transaction to the blockchain, the sender will pay the gas fee, and the verified transaction will be submitted to the node. The node will then  broadcast this transaction in the blockchain network. **If this transaction is sent to an intermediary that can help the sender pay the gas fee and execute the transaction, then this is a meta transaction**.
 
 How can we achieve this? We embed a meta transaction inside an ordinary transaction, and then the intermidiary signs that meta transaction, and specifies the recipient address as the address of the meta-transaction smart contract. Therefore, the gas fee will be paid by the intermediary. After receiving a meta transaction, the meta transaction smart contract will verify the signature information of the meta transaction. After confirmation, the meta transaction will be executed by the meta transaction smart contract.
 
@@ -33,7 +34,7 @@ Get the Meta Transaction contract source code by command:
 $ git clone https://github.com/BSN-Spartan/Meta-Transaction.git
 ```
 
-For beginners, the contracts in this application can be deployed by the steps in [Spartan Quick Testing](https://www.spartan.bsn.foundation/main/quick-testing#step1).
+For beginners, the contracts in this application can be deployed using the steps in [Spartan Quick Testing](https://www.spartan.bsn.foundation/main/quick-testing#step1).
 
 ### Scenario
 
@@ -49,7 +50,7 @@ Suppose that Alice holds 100 MKT tokens (ERC20 standard tokens), and now she wou
 
 ### Offline Signature Program
 
-This contract provides an offline signature package. Developers can use the offline signature program to sign the meta transaction. This program is running by Node.js, and developers can generate the signature in the command prompt by follow steps:
+This contract provides an offline signature package. Developers can use the offline signature program to sign the meta transaction. This program is running by Node.js, and developers can generate the signature in the command prompt through the following steps:
 
 
 1. Install Node.js in the system and check the version:
@@ -107,7 +108,7 @@ node ERC20MetaTxSign.js
 
 ### getNonce
 
-This function can get the number of meta transactions the sender has already sent.
+This function enables a user to retrieve the number of meta transactions the sender has sent.
 
 ```
 function getNonce(address from)
